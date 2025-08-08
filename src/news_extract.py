@@ -10,9 +10,9 @@ api_key = os.getenv("news-data-api-key")
 base_url = "https://gnews.io/api/v4/search?q="
 player_name = player_alias.player_alias[0]
 
-def get_news_data(player):
+def get_news_data():
     data = set()
-    url = base_url + player + "&apikey=" + api_key
+    url = base_url + player_name + "&apikey=" + api_key
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -27,5 +27,3 @@ def get_news_data(player):
         print(response.status_code, response.text)
 
     return list(data)
-
-print(get_news_data(player_name))

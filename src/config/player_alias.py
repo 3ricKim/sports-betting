@@ -8,5 +8,7 @@ player_alias = [
     "jjeff",
     "jefferson jr",
     "jefferson wr",
-    "j. jefferson"
+    "j. jefferson",
+    "jefferson",
+    "JJ"
 ]
