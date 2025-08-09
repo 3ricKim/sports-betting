@@ -1,1 +1,0 @@
-url = " https://api.the-odds-api.com/v4/historical/sports/americanfootball_nfl/events?"
