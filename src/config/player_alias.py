@@ -1,20 +1,18 @@
-import google.generativeai as genai
 from dotenv import load_dotenv
 import os
+import google.generativeai as genai
+from google.generativeai import types
+
 ## use llm to get player nicknames
-
 load_dotenv()
-gemini_api_key = os.getenv("gemini-api-key")
-genai.configure(api_key=gemini_api_key)
+genai.configure(api_key=os.getenv("gemini-api-key"))
 
-model = genai.GenerativeModel('gemini-1.5-flash')
-chat = model.start_chat(history=[])
-reply = chat.send_message("Hello")
-print(reply)
-
-player_alias = [
+model = genai.GenerativeModel(model_name="gemini-2.5-flash",
+                              system_instruction='''You will be provided with an athlete's name. You need to only the most common nicknames the player may have, but don't include vague names. Also include any abbreviations of the name,
+                              The response type must be a python list.
+                              The first element in the list must be the player's full name.
+                              For example, if the user provides Justin Jefferson, a good answer is [
     "Justin Jefferson",
-    "justin jefferson",
     "jjettas",
     "jetts",
     "j jets",
@@ -22,6 +20,10 @@ player_alias = [
     "jefferson jr",
     "jefferson wr",
     "j. jefferson",
-    "jefferson",
-    "JJ"
-]
+] Notice how Justin or Jefferson is not included because it may be confused with other people.
+Do not add any quotation around your answer so the response can be saved directly as a variable''')
+response = model.generate_content(
+    "Calvin Johnson",
+)
+
+player_alias = response.text
