@@ -1,5 +1,5 @@
 from transformers import pipeline
-import reddit_extract, news_extract
+import sentiment.reddit_extract as reddit_extract, sentiment.news_extract as news_extract
 
 sentiment_pipeline = pipeline("sentiment-analysis",framework="pt")
 reddit_data = reddit_extract.get_reddit_data()
