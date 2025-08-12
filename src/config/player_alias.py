@@ -21,7 +21,8 @@ model = genai.GenerativeModel(model_name="gemini-2.5-flash",
     "jefferson wr",
     "j. jefferson",
 ] Notice how Justin or Jefferson is not included because it may be confused with other people.
-Do not add any quotation around your answer so the response can be saved directly as a variable''')
+Do not add any quotation around your answer.''')
+
 response = model.generate_content(
     "Calvin Johnson",
 )
