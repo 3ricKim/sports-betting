@@ -46,12 +46,19 @@ for ev in events:
         # Skip if cancelled
         if val.get("cancelled") is True:
             continue
-
+        if val.get("betTypeID") != "ou":
+            continue
+        if not val.get("bookOverUnder"):
+            continue
+        # print(val.get("betTypeID"))
+        
         # ---------- flat row ----------
         flat_row = {
             "id_key": key,
             "eventID": event_id, "sportID": sport_id, "leagueID": league_id,
-            "home_team": home_team, "away_team": away_team
+            "home_team": home_team, "away_team": away_team,
+            "label": 1 if (val.get("sideID") == "over" and float(val.get("score")) > float(val.get("bookOverUnder"))) or 
+                  (val.get("sideID") == "under" and float(val.get("score")) < float(val.get("bookOverUnder"))) else 0
         }
         for c in cols_to_keep:
             flat_row[c] = val.get(c)
@@ -83,7 +90,10 @@ for ev in events:
                 "cancelled": val.get("cancelled"),
 
                 "eventID": event_id, "sportID": sport_id, "leagueID": league_id,
-                "home_team": home_team, "away_team": away_team
+                "home_team": home_team, "away_team": away_team,
+
+                "label": 1 if (val.get("sideID") == "over" and float(val.get("score")) > float(val.get("bookOverUnder"))) or 
+                  (val.get("sideID") == "under" and float(val.get("score")) < float(val.get("bookOverUnder"))) else 0
             })
 
 # Save CSVs
