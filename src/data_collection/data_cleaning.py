@@ -50,6 +50,13 @@ for ev in events:
             continue
         if not val.get("bookOverUnder"):
             continue
+        if val.get("fairOdds") in (None, ""):
+            continue
+        if val.get("bookOdds") in (None, ""):
+            continue
+        if val.get("bookOverUnder") in (None, ""):
+            continue
+
         # print(val.get("betTypeID"))
         
         # ---------- flat row ----------
